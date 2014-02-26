@@ -1,0 +1,22 @@
+--Each computer needs a unique location
+Location = 2
+
+local modem = peripheral.wrap("back")
+--Channel is the same as location
+modem.open(Location)
+
+
+while (1) do 
+  local event, modemSide, senderChannel, replyChannel, message, senderDistance = os.pullEvent("modem_message")
+  if (replyChannel == Location) then
+    --Follow command
+    if (redstone.getOutput("bottom")==true) then
+      redstone.setOutput("bottom", false)
+    else
+      redstone.setOutput("bottom", true)
+    end
+  else
+    --Pass command along to next computer
+    modem.transmit(Location+1, replyChannel, message)
+  end
+end
