@@ -1,0 +1,28 @@
+-- Create reference to modem
+modem = peripheral.wrap("right")
+modem.open(192)
+
+function packup()
+	--Clean up and move 1 space
+	modem.transmit(192, 192, "Pack")
+	os.pullEvent("modem_message")
+	turtle.select(16)
+	turtle.dig()
+	turtle.turnLeft()
+	turtle.forward()
+	modem.transmit(192, 192, "Move")
+	os.pullEvent("modem_message")
+end
+
+function setup()
+	modem.transmit(192, 192, "Setup")
+	turtle.turnRight()
+	turtle.select(16) -- Tesseract is in slot 16
+	turtle.place()
+	os.pullEvent("modem_message")
+end
+
+while run() do
+	setup()
+	packup()
+end
