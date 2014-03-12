@@ -1,15 +1,39 @@
 -- Create reference to modem
 modem = peripheral.wrap("right")
 modem.open(192)
+modem.open(190)
+
+function update(message)
+	pasteentry = message:sub(8)
+	if shell.run("pastebin get " .. pasteentry .. " temp") == true then
+		fs.delete("startup")
+		fs.move("temp", "startup")
+	else
+		print("Failed to update")
+	end
+	os.reboot()
+end
 
 function pack()
-	
+	--Ender chest
+	turtle.select(3)
+	turtle.dig()
+	turtle.down()
+	--Mining well
+	turtle.select(2)
+	turtle.dig()
+	turtle.forward()
+	--Conduit
+	turtle.select(1)
+	turtle.dig()
+	modem.transmit(192,192, "Done")
 end
 
 function move()
 	if turtle.back() == false then
 		turtle.turnRight()
 		turtle.turnRight()
+		turtle.select(4)
 		turtle.dig()
 		turtle.up()
 		turtle.dig()
@@ -18,6 +42,7 @@ function move()
 		turtle.turnRight()
 		turtle.back()
 	end
+	modem.transmit(192,192, "Done")
 end
 
 function setup()
@@ -35,6 +60,18 @@ function setup()
 	modem.transmit(192,192, "Done")
 end
 
+function checkRun()
+	if turtle.getItemCount(13) == 1 then
+		turtle.select(13)
+		turtle.placeUp()
+		chest = peripheral.wrap("top")
+		if chest.getStackInSlot(1) then
+			modem.transmit(192, 192, "Run")
+		else 
+			modem.transmit(192, 192, "Stop")
+		end
+	end
+end
 
 while true do
 	local event, modemSide, senderChannel, replyChannel, message, senderDistance = os.pullEvent("modem_message")
@@ -44,5 +81,9 @@ while true do
 		move()
 	elseif message == "Setup" then
 		setup()
+	elseif message == "CheckRun" then
+		checkRun()
+	elseif message:sub(1,6) == "Update" then
+		update(message)
 	end
 end
