@@ -84,12 +84,13 @@ function checkRun()
 		turtle.select(13)
 		turtle.placeUp()
 		chest = peripheral.wrap("top")
-		if chest.getStackInSlot(1) then
+		Run = chest.getStackInSlot(1)
+		chest.getStackInSlot(1)
+		if Run then
 			modem.transmit(192, 192, "Run")
 		else 
 			modem.transmit(192, 192, "Stop")
 		end
-		turtle.digUp()
 	end
 end
 
