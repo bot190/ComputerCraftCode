@@ -52,7 +52,7 @@ function move()
 		turtle.back()
 	end
 end
-function Shuffle()
+function shuffle()
 	move()
 	modem.transmit(192,192, "Done")
 end
@@ -89,6 +89,7 @@ function checkRun()
 		else 
 			modem.transmit(192, 192, "Stop")
 		end
+		turtle.digUp()
 	end
 end
 
