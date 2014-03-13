@@ -39,9 +39,12 @@ function setup()
 	turtle.place()
 end
 
-print( run())
---while run() do
-	setup()
-	sleep(20)
-	packup()
---end
+while true do
+	if run()
+		setup()
+		sleep(20)
+		packup()
+	else 
+		sleep(5)
+	end
+end
