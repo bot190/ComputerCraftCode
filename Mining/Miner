@@ -3,11 +3,11 @@ modem = peripheral.wrap("right")
 modem.open(192)
 modem.open(190)
 
-function update(message)
-	pasteentry = message:sub(8)
-	if shell.run("pastebin get " .. pasteentry .. " temp") == true then
-		fs.delete("startup")
-		fs.move("temp", "startup")
+function update()
+	
+	if shell.run("github bot190 ComputerCraftCode ./ Mining") then
+		--fs.delete("startup")
+		fs.move("/ComputerCraftCode/Mining/Miner", "startup")
 	else
 		print("Failed to update")
 	end
@@ -42,6 +42,9 @@ function move()
 		turtle.turnRight()
 		turtle.back()
 	end
+end
+function Shuffle()
+	move()
 	modem.transmit(192,192, "Done")
 end
 
@@ -49,7 +52,7 @@ function setup()
 	--Conduit in slot 1
 	turtle.select(1)
 	turtle.place()
-	turtle.back()
+	move()
 	--Mining Well in slot 2
 	turtle.select(2)
 	turtle.place()
@@ -78,12 +81,12 @@ while true do
 	if (message == "Pack") then
 		pack()
 	elseif message == "Move" then
-		move()
+		shuffle()
 	elseif message == "Setup" then
 		setup()
 	elseif message == "CheckRun" then
 		checkRun()
-	elseif message:sub(1,6) == "Update" then
-		update(message)
+	elseif message == "Update" then
+		update()
 	end
 end
