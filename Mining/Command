@@ -2,6 +2,8 @@
 modem = peripheral.wrap("right")
 modem.open(192)
 numTurtles = 8
+height = 180
+RFin = 1000
 
 function run()
 	modem.transmit(192, 192, "CheckRun")
@@ -39,10 +41,23 @@ function setup()
 	turtle.place()
 end
 
+function calculateTime()
+	
+	RFper = RFin/numTurtles
+	blocksPerTick = RFper/250
+	if blocksPerTick > 1 then
+		blocksPerTick = 1
+	end
+	blocksPerSec = 20*blocksPerTick
+	t = ceil(height/blocksPerSec)
+	t = t + 2
+	return t
+end
+
 while true do
 	if run()
 		setup()
-		sleep(20)
+		sleep(calculateTime())
 		packup()
 	else 
 		sleep(5)
