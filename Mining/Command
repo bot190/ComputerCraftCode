@@ -16,14 +16,14 @@ function run()
 end
 
 function packup()
+	turtle.select(16)
+	turtle.dig()
+	turtle.turnLeft()
 	--Clean up and move 1 space
 	modem.transmit(192, 192, "Pack")
 	for i=1,numTurtles do
 		os.pullEvent("modem_message")
 	end
-	turtle.select(16)
-	turtle.dig()
-	turtle.turnLeft()
 	turtle.forward()
 	modem.transmit(192, 192, "Move")
 	for i=1,numTurtles do
