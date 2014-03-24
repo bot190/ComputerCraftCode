@@ -44,7 +44,7 @@ end
 function calculateTime()
 	
 	RFper = RFin/numTurtles
-	blocksPerTick = RFper/250
+	blocksPerTick = RFper/500
 	if blocksPerTick > 1 then
 		blocksPerTick = 1
 	end

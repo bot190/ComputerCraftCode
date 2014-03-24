@@ -83,8 +83,7 @@ function checkRun()
 	if turtle.getItemCount(13) == 1 then
 		turtle.select(13)
 		turtle.placeUp()
-		chest = peripheral.wrap("top")
-		Run = chest.getStackInSlot(1)
+		Run = peripheral.call("top", getStackInSlot, 1)
 		turtle.digUp()
 		if Run then
 			if Run["qty"]>0 then
