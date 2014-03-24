@@ -87,9 +87,11 @@ function checkRun()
 		Run = chest.getStackInSlot(1)
 		turtle.digUp()
 		if Run then
-			modem.transmit(192, 192, "Run")
-		else 
-			modem.transmit(192, 192, "Stop")
+			if Run["qty"]>0 then
+				modem.transmit(192, 192, "Run")
+			else 
+				modem.transmit(192, 192, "Stop")
+			end
 		end
 	end
 end

@@ -49,13 +49,13 @@ function calculateTime()
 		blocksPerTick = 1
 	end
 	blocksPerSec = 20*blocksPerTick
-	t = ceil(height/blocksPerSec)
+	t = math.ceil(height/blocksPerSec)
 	t = t + 2
 	return t
 end
 
 while true do
-	if run()
+	if run() then
 		setup()
 		sleep(calculateTime())
 		packup()
