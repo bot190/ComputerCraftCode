@@ -78,7 +78,8 @@ function setup()
 	turtle.place()
 	--Place Second Chunk Loader
 	if (turtle.getItemCount(6) >= 1) then
-		fs.open("Wait.txt")
+		wait = fs.open("Wait.txt","w")
+		fs.close(wait)
 		turtle.select(6)
 		turtle.placeDown()
 	end
