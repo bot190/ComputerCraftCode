@@ -23,14 +23,14 @@ function pack()
 	turtle.select(2)
 	turtle.dig()
 	--Loader
-	if (fs.exists("Wait.txt")) then
+	if (fs.exists("wait")) then
 		modem.open(191)
 		os.pullEvent("modem_message")
-		fs.delete("Wait.txt")
+		fs.delete("wait")
 		turtle.select(6)
 	else 
 		turtle.select(5)
-		turtle.dig()
+		turtle.digDown()
 	end
 	--Conduit
 	turtle.forward()
@@ -78,8 +78,8 @@ function setup()
 	turtle.place()
 	--Place Second Chunk Loader
 	if (turtle.getItemCount(6) >= 1) then
-		wait = fs.open("Wait.txt","w")
-		fs.close(wait)
+		wait = fs.open("wait","w")
+		wait.close()
 		turtle.select(6)
 		turtle.placeDown()
 	end
