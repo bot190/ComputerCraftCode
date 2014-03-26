@@ -27,9 +27,11 @@ function pack()
 		modem.open(191)
 		os.pullEvent("modem_message")
 		fs.delete("Wait.txt")
+		turtle.select(6)
+	else 
+		turtle.select(5)
+		turtle.dig()
 	end
-	turtle.select(5)
-	turtle.dig()
 	--Conduit
 	turtle.forward()
 	turtle.select(1)
@@ -75,14 +77,14 @@ function setup()
 	turtle.select(2)
 	turtle.place()
 	--Place Second Chunk Loader
-	if (turtle.getItemCount(5) >= 1) then
+	if (turtle.getItemCount(6) >= 1) then
 		fs.open("Wait.txt")
-		turtle.select(5)
+		turtle.select(6)
 		turtle.placeDown()
 	end
-	if (turtle.getItemCount(4) >= 1) then
+	if (turtle.getItemCount(5) >= 1) then
 		modem.transmit(191, 191, "Run")
-		turtle.select(4)
+		turtle.select(5)
 		turtle.placeDown()
 	end
 	--EnderChest in slot 3
