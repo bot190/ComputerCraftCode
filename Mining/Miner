@@ -22,8 +22,16 @@ function pack()
 	--Mining well
 	turtle.select(2)
 	turtle.dig()
-	turtle.forward()
+	--Loader
+	if (fs.exists("Wait.txt")) then
+		modem.open(191)
+		os.pullEvent("modem_message")
+		fs.delete("Wait.txt")
+	end
+	turtle.select(5)
+	turtle.dig()
 	--Conduit
+	turtle.forward()
 	turtle.select(1)
 	turtle.dig()
 	modem.transmit(192,192, "Done")
@@ -52,6 +60,7 @@ function move()
 		turtle.back()
 	end
 end
+
 function shuffle()
 	move()
 	modem.transmit(192,192, "Done")
@@ -65,12 +74,23 @@ function setup()
 	--Mining Well in slot 2
 	turtle.select(2)
 	turtle.place()
-	turtle.up()
+	--Place Second Chunk Loader
+	if (turtle.getItemCount(5) >= 1) then
+		fs.open("Wait.txt")
+		turtle.select(5)
+		turtle.placeDown()
+	end
+	if (turtle.getItemCount(4) >= 1) then
+		modem.transmit(191, 191, "Run")
+		turtle.select(4)
+		turtle.placeDown()
+	end
 	--EnderChest in slot 3
+	turtle.up()
 	turtle.select(3)
 	turtle.place()
 	--Check if we have extra crap and throw away
-	for i=5,8 do
+	for i=6,8 do
 		if (turtle.getItemCount(i) >= 1) then
 			turtle.select(i)
 			turtle.drop()
@@ -83,7 +103,7 @@ function checkRun()
 	if turtle.getItemCount(13) == 1 then
 		turtle.select(13)
 		turtle.placeUp()
-		Run = peripheral.call("top", getStackInSlot, 1)
+		Run = peripheral.call("top", "getStackInSlot", 1)
 		turtle.digUp()
 		if Run then
 			if Run["qty"]>0 then
