@@ -28,11 +28,12 @@ function pack()
 		modem.close(191)
 		turtle.select(6)
 		turtle.digDown()
-	else 
+	elseif fs.exists("mover") then 
 		turtle.select(5)
 		turtle.digDown()
 		turtle.back()
 		turtle.placeDown()
+		turtle.forward()
 		modem.transmit(191, 191, "Run")
 	end
 	--Conduit
@@ -84,6 +85,10 @@ function setup()
 	--Place Second Chunk Loader
 	if (turtle.getItemCount(6) >= 1) then
 		turtle.select(6)
+		turtle.placeDown()
+	end
+	if (turtle.getItemCount(5) >= 1) then
+		turtle.select(5)
 		turtle.placeDown()
 	end
 	--EnderChest in slot 3
