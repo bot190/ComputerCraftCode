@@ -26,7 +26,6 @@ function pack()
 		modem.open(191)
 		os.pullEvent("modem_message")
 		modem.close(191)
-		fs.delete("wait")
 		turtle.select(6)
 		turtle.digDown()
 	else 
@@ -84,12 +83,9 @@ function setup()
 	turtle.place()
 	--Place Second Chunk Loader
 	if (turtle.getItemCount(6) >= 1) then
-		wait = fs.open("wait","w")
-		wait.close()
 		turtle.select(6)
 		turtle.placeDown()
 	end
-
 	--EnderChest in slot 3
 	turtle.up()
 	turtle.select(3)
