@@ -127,6 +127,23 @@ function checkRun()
 	end
 end
 
+function forward()
+	if turtle.forward() == false then
+		sleep(1)
+		forward()
+	else 
+		turtle.forward()
+	end
+end
+
+function back()
+	if turtle.back() == false then
+		sleep(1)
+		back()
+	else
+		turtle.back()
+	end
+end
 while true do
 	modem.open(192)
 	local event, modemSide, senderChannel, replyChannel, message, senderDistance = os.pullEvent("modem_message")
@@ -146,8 +163,8 @@ while true do
 	elseif message == "Left" then
 		turtle.turnLeft()
 	elseif message == "Forward" then
-		turtle.forward()
+		forward()
 	elseif message == "Back" then
-		turtle.back()
+
 	end
 end
