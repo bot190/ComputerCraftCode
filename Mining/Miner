@@ -131,8 +131,6 @@ function forward()
 	if turtle.forward() == false then
 		sleep(1)
 		forward()
-	else 
-		turtle.forward()
 	end
 end
 
@@ -140,8 +138,6 @@ function back()
 	if turtle.back() == false then
 		sleep(1)
 		back()
-	else
-		turtle.back()
 	end
 end
 while true do
