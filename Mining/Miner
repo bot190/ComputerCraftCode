@@ -141,5 +141,13 @@ while true do
 		checkRun()
 	elseif message == "Update" then
 		update()
+	elseif message == "Right" then
+		turtle.turnRight()
+	elseif message == "Left" then
+		turtle.turnLeft()
+	elseif message == "Forward" then
+		turtle.forward()
+	elseif message == "Back" then
+		turtle.back()
 	end
 end
